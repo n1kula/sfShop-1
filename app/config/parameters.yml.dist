@@ -19,5 +19,5 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
 
-    facebook.client.id: ~
-    facebook.client.secret: ~
+    facebook.client.id: AddClientIdForFacebookApplication
+    facebook.client.secret: AddClientSecretForFacebookApplication
