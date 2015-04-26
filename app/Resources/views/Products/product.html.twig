@@ -1,4 +1,4 @@
-<div class="col-sm-6 col-md-3">
+<div class="product-item col-sm-6 col-md-3">
     <div class="thumbnail clearfix">
         {% if product.imageName %}
             <img src="{{ vich_uploader_asset(product, 'product_image') | imagine_filter('product_image_thumb') }}" alt="" class="img-thumbnail">
