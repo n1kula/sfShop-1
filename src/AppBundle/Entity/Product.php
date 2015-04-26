@@ -32,7 +32,7 @@ class Product
      * @ORM\Column(name="name", type="string", length=255)
      * 
      * @Assert\NotBlank()
-     * @Assert\Length(min=5, minMessage="Tytuł musi mieć conajmniej {{ limit }} znaków.")
+     * @Assert\Length(min=5, minMessage="products.min_lenght")
      */
     private $name;
 

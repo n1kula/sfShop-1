@@ -1,0 +1,9 @@
+last_products: Ostatnio dodane produkty
+
+form:
+    comment:
+        label: Wpisz komentarz
+        placeholder: Wprowadź treść komentarza
+
+
+

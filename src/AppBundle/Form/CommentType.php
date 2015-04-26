@@ -16,10 +16,10 @@ class CommentType extends AbstractType
     {
         $builder
             ->add('content', 'textarea', array(
-                'label' => "Treść komentarza",
+                'label' => "form.comment.label",
                 'attr'  => array(
                     'class' => 'form-control', 
-                    'placeholder' => "Wprowadź treść komentarza"
+                    'placeholder' => "form.comment.placeholder"
                 )
             ))
         ;
@@ -31,7 +31,7 @@ class CommentType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Comment'
+            'data_class' => 'AppBundle\Entity\Comment',
         ));
     }
 

@@ -1,0 +1,6 @@
+last_products: Last added products
+
+form:
+    comment:
+        label: Write a comment
+        placeholder: Add comment
