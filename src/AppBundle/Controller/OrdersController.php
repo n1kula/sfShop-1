@@ -20,7 +20,8 @@ class OrdersController extends Controller
     {
         $basket = $this->get('basket');
 
-        if (empty($basket->getProducts())) {
+        $products = $basket->getProducts();
+        if (empty($products)) {
             $this->addFlash('danger', 'Aby zrealizować zamówienie, musisz posiadać produkty w koszyku');
 
             return $this->redirectToRoute('basket', []);
