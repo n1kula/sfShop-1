@@ -1,11 +1,10 @@
-<?php
-
-namespace AppBundle\Tests\Controller;
+<?php namespace AppBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class HomepageControllerTest extends WebTestCase
 {
+
     public function testIndex()
     {
         $client = static::createClient();
@@ -13,6 +12,7 @@ class HomepageControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertTrue($crawler->filter('html:contains("Homepage")')->count() > 0);
+        $this->assertTrue($crawler->filter('html:contains("Ostatnio dodane produkty")')->count() > 0);
     }
+
 }
