@@ -50,9 +50,9 @@ class CommentsController extends Controller
     }
 
     /**
-     * @Route("/komentarze/glosuj-up/{id}/{productId}", name="comment_vote_up")
+     * @Route("/komentarze/glosuj-up/{id}", name="comment_vote_up")
      */
-    public function voteUpAction(Comment $comment, $productId, Request $request)
+    public function voteUpAction(Comment $comment, Request $request)
     {
         $commentVote = $this->getDoctrine()
             ->getRepository('AppBundle:CommentVote')
@@ -97,9 +97,9 @@ class CommentsController extends Controller
     }
 
     /**
-     * @Route("/komentarze/glosuj-down/{id}/{productId}", name="comment_vote_down")
+     * @Route("/komentarze/glosuj-down/{id}", name="comment_vote_down")
      */
-    public function voteDownAction(Comment $comment, $productId, Request $request)
+    public function voteDownAction(Comment $comment, Request $request)
     {
         $commentVote = $this->getDoctrine()
             ->getRepository('AppBundle:CommentVote')

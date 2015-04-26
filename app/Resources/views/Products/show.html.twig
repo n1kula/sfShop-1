@@ -41,16 +41,12 @@
             <br><br>
     <div class="row">
         <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#description" aria-controls="description" role="tab" data-toggle="tab">Opis</a></li>
-            <li role="presentation"><a href="#comments" aria-controls="comments" role="tab" data-toggle="tab">Komentarze</a></li>
+            <li role="presentation" class="active"><a href="#comments" aria-controls="comments" role="tab" data-toggle="tab">Komentarze</a></li>
+            <li role="presentation"><a href="#description" aria-controls="description" role="tab" data-toggle="tab">Opis</a></li>
         </ul>
 
         <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="description">
-                <p>{{ product.description }}</p>
-            </div>
-
-            <div role="tabpanel" class="tab-pane" id="comments">
+            <div role="tabpanel" class="tab-pane active" id="comments">
                 <h4>Komentarze</h4>
                 {% if not app.user %}
                     <p>Aby móc dodawać komentarz musisz się wcześniej <a href="{{ path('fos_user_security_login') }}" title="Formularz logowania">zalogować</a>.</p>
@@ -68,8 +64,8 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="pull-right">
-                                <span class="text-success">{{ comment.nbVoteUp }}</span> <a href="{{ path('comment_vote_up', {'id': comment.id, 'productId': product.id}) }}" title="Up" class="vote-up"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a> | 
-                                <span class="text-danger">{{ comment.nbVoteDown }}</span> <a href="{{ path('comment_vote_down', {'id': comment.id, 'productId': product.id}) }}" title="Down" class="vote-down"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a>
+                                <span class="text-success">{{ comment.nbVoteUp }}</span> <a href="{{ path('comment_vote_up', {'id': comment.id}) }}" title="Up" class="vote-up"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a> | 
+                                <span class="text-danger">{{ comment.nbVoteDown }}</span> <a href="{{ path('comment_vote_down', {'id': comment.id}) }}" title="Down" class="vote-down"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a>
                             </div>
                             <p>{{ comment.content }}</p>
                             <small>Dodany {{ comment.createdAt|date('d-m-Y') }} przez {{ comment.user }}</small>
@@ -78,6 +74,10 @@
                 {% else %}
                     <p>Nie ma jeszcze żadnych komentarzy. Dodaj swój jako pierwszy!</p>
                 {% endfor %}
+            </div>
+            
+            <div role="tabpanel" class="tab-pane" id="description">
+                <p>{{ product.description }}</p>
             </div>
         </div>
     </div>     
