@@ -40,6 +40,6 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
             $manager->persist($user);
         }
 
-	$manager->flush();
+        $manager->flush();
     }
 }
