@@ -2,38 +2,10 @@
 
 namespace AppBundle\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
-use Doctrine\Common\DataFixtures\Purger\ORMPurger;
-use Doctrine\Common\DataFixtures\Loader;
+use AppBundle\Tests\WebTestCase;
 
 class ProductControllerTest extends WebTestCase
 {
-    protected static $application;
-
-    protected function setUp()
-    {
-        static::$kernel = static::createKernel();
-		static::$kernel->boot();
-		$this->em = static::$kernel->getContainer()
-			->get('doctrine')
-			->getManager();
-        
-        // reset db
-		$purger = new ORMPurger($this->em);
-		$purger->purge();
-        
-        $loader = new Loader();
-		$loader->addFixture(new \AppBundle\DataFixtures\ORM\LoadUserData());
-        $loader->addFixture(new \AppBundle\DataFixtures\ORM\LoadCategoryData());
-        $loader->addFixture(new \AppBundle\DataFixtures\ORM\LoadProductsData());
-		
-		$purger = new ORMPurger($this->em);
-		$executor = new ORMExecutor($this->em, $purger);
-		$executor->execute($loader->getFixtures());
-    }
-
-    
     public function testAddToCart()
     {
         $client = static::createClient();
@@ -45,7 +17,7 @@ class ProductControllerTest extends WebTestCase
             // wszystkie linki "Pokaż"
             ->filter('a:contains("Pokaż")')
             // wybieramy drugi link
-            ->eq(1) 
+            ->eq(1)
             // wybieramy jako link
             ->link()
         ;
@@ -68,6 +40,22 @@ class ProductControllerTest extends WebTestCase
         $this->assertEquals(1, $crawler->filter('h1:contains("Koszyk")')->count());
         // 1 element w koszyku
         $this->assertEquals(1, $crawler->filter('table.table tbody>tr')->count());
+        
+        $link = $crawler
+            // wybieramy link "Wyczyść koszyk"
+            ->selectLink('Wyczyść Koszyk')
+            ->link()
+        ;
+        
+        // klikamy w link "Wyczyść koszyk"
+        $crawler = $client->click($link);
+        // przekierowanie po wyczyszczeniu koszyka
+        $crawler = $client->followRedirect();
+        
+        // jedna h1: Koszyk
+        $this->assertEquals(1, $crawler->filter('h1:contains("Koszyk")')->count());
+        // koszyk powinien być pusty
+        $this->assertEquals(0, $crawler->filter('table.table tbody>tr')->count());
     }
     
 }
